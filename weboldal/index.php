@@ -48,24 +48,36 @@ $termekek = $conn->query("SELECT * FROM termekek ORDER BY id DESC");
     <h1>Gyűjtői Katalógus</h1>
 
     <div class="form-container">
-        <h3>Új elem hozzáadása</h3>
-        <form method="POST" enctype="multipart/form-data">
-            <input type="text" name="nev" placeholder="Termék neve" required>
-            <input type="number" name="ar" placeholder="Ár (Ft)" required>
-            
-        
-            <select name="tipus" required style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;">
-                <option value="Kártya">Kártya</option>
-                <option value="Könyv">Könyv</option>
-                <option value="Könyv">Képregény</option>
-                <option value="Könyv">Figura</option>
-            </select>
+        <h3 style="text-align: center;">Új elem hozzáadása</h3>
+      
 
-            <textarea name="leiras" placeholder="Rövid leírás"></textarea>
-            <input type="file" name="kep" accept="image/*" required>
-            <button type="submit" name="mentes">Hozzáadás</button>
-        </form>
-    </div>
+
+
+    <form method="POST" enctype="multipart/form-data">
+
+        <label for="nev">Termék neve</label>
+        <input type="text" id="nev" name="nev" placeholder="Termék neve" required>
+
+        <label for="ar">Ár</label>
+        <input type="number" id="ar" name="ar" placeholder="Ár (Ft)" required>
+
+        <label for="tipus">Típus</label>
+        <select id="tipus" name="tipus" required style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc;">
+            <option value="Kártya">Kártya</option>
+            <option value="Könyv">Könyv</option>
+            <option value="Képregény">Képregény</option>
+            <option value="Figura">Figura</option>
+        </select>
+
+        <label for="leiras">Leírás</label>
+        <textarea id="leiras" name="leiras" placeholder="Rövid leírás"></textarea>
+
+        <label for="kep">Kép feltöltése</label>
+        <input type="file" id="kep" name="kep" accept="image/*" required>
+
+        <button type="submit" name="mentes">Hozzáadás</button>
+    </form>
+</div>
 
     <div class="grid">
         <?php while($row = $termekek->fetch_assoc()): ?>
@@ -80,6 +92,6 @@ $termekek = $conn->query("SELECT * FROM termekek ORDER BY id DESC");
             </div>
         <?php endwhile; ?>
     </div>
-
+   
 </body>
 </html>
