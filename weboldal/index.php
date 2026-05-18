@@ -1,25 +1,38 @@
 <?php
-$host = "localhost"; $user = "root"; $pass = ""; $db = "shop_db";
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db = "shop_db";
+
 $conn = new mysqli($host, $user, $pass, $db);
 
 if (isset($_POST['mentes'])) {
+
     $nev = $_POST['nev'];
     $ar = $_POST['ar'];
     $leiras = $_POST['leiras'];
-    $tipus = $_POST['tipus']; 
-    
-    $fajlNev = time() . "_" . $_FILES['kep']['name']; 
+    $tipus = $_POST['tipus'];
+
+    $fajlNev = time() . "_" . $_FILES['kep']['name'];
     $cel = "kepek/" . $fajlNev;
 
     if (move_uploaded_file($_FILES['kep']['tmp_name'], $cel)) {
-        $sql = "INSERT INTO termekek (nev, ar, kep_utvonal, leiras, tipus) VALUES ('$nev', '$ar', '$fajlNev', '$leiras', '$tipus')";
+
+        $sql = "INSERT INTO termekek 
+        (nev, ar, kep_utvonal, leiras, tipus) 
+        VALUES 
+        ('$nev', '$ar', '$fajlNev', '$leiras', '$tipus')";
+
         $conn->query($sql);
+
+       
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit();
     }
 }
 
 $termekek = $conn->query("SELECT * FROM termekek ORDER BY id DESC");
 ?>
-
 <!DOCTYPE html>
 <html lang="hu">
 <head>
